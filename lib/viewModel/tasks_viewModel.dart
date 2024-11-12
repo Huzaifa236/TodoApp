@@ -16,7 +16,7 @@ class TaskViewModel extends ChangeNotifier{
    final dateController = TextEditingController();
    final timeController = TextEditingController();
 
-   bool get isValid => taskName != null &&dateController.text == "" &&timeController.text =="";
+   bool get isValid => taskName != null &&dateController.text.isNotEmpty &&timeController.text.isNotEmpty;
    setTaskName (String? value){
      taskName = value;
      log(value.toString());
@@ -69,7 +69,11 @@ class TaskViewModel extends ChangeNotifier{
      notifyListeners();
 
    }
-
-
+   deleteTask(int index) {
+  if (index >= 0 && index < tasks.length) {
+    tasks.removeAt(index);
+    notifyListeners();
+  }
+}
 
 }

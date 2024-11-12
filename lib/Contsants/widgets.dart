@@ -3,18 +3,22 @@
 
 import 'package:flutter/material.dart';
 
+import '../Models/task_model.dart';
+
 class TaskWidget extends StatelessWidget {
+  final Task task;
+  final VoidCallback onpressed;
   const TaskWidget({
-    super.key,
+    super.key, required this.task, required this.onpressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 0),
-      title: const Text("Doctor Appointment",style: TextStyle(color: Colors.white),),
-      subtitle: const Text("3:30 PM",style: TextStyle(color: Colors.white),),
-      trailing: IconButton(onPressed: (){}, icon: const Icon(Icons.delete),color: Colors.red,),
+      title:  Text(task.taskName,style: const TextStyle(color: Colors.white),),
+      subtitle:  Text("${task.date}, ${task.time}",style: const TextStyle(color: Colors.white),),
+      trailing: IconButton(onPressed: onpressed, icon: const Icon(Icons.delete),color: Colors.red,),
     );
   }
 }

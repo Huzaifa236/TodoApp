@@ -1,7 +1,6 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 import 'package:provider/provider.dart';
 import 'package:todo_app/Contsants/widgets.dart';
 import 'package:todo_app/viewModel/tasks_viewModel.dart';
@@ -30,7 +29,10 @@ class TodoScreen extends StatelessWidget {
         builder: (context,taskProvider,_){
           return ListView.separated(
             itemBuilder: (context, index) {
-              return const TaskWidget();
+              final task = taskProvider.tasks[index];
+              return TaskWidget(task: task, onpressed: () {
+                taskProvider.deleteTask(index);
+              },);
             },
             separatorBuilder: (context, index) {
               return const Divider(
